@@ -409,7 +409,7 @@ export function GenericMessage({ children }: { children: ReactNode }) {
   return <div>{children}</div>;
 }
 
-function TakeShares() {
+export function TakeShares() {
   const { canEmit, canEmitUserId, emit, isPending } =
     useAction(TakeSharesAction);
   const numShares = useInjected(ShareHelper).getSharesTheyCanTake();

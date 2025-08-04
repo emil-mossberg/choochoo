@@ -38,7 +38,7 @@ export class StateStore {
 
   reset(): void {
     this.state = new Map();
-  }
+  } 
 
   init<T>(key: Key<T>, state: T): void {
     assert(!this.isInitialized(key), "cannot call init on initialized key");
