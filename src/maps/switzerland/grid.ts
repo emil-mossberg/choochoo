@@ -1,10 +1,4 @@
-import {
-  BLACK,
-  BLUE,
-  PURPLE,
-  RED,
-  YELLOW,
-} from "../../engine/state/good";
+import { BLACK, BLUE, PURPLE, RED, YELLOW } from "../../engine/state/good";
 import { Direction } from "../../engine/state/tile";
 import { duplicate } from "../../utils/functions";
 import {
@@ -18,14 +12,48 @@ import {
   black,
   MOUNTAIN,
 } from "../factory";
+import { MutableLandData } from "../../engine/state/space";
+import { type SwitzerlandMapData } from './build'
 
+
+function mapSpecific(
+  input: MutableLandData,
+  mapSpecific: Partial<SwitzerlandMapData>,
+): MutableLandData {
+  return {
+    ...input,
+    mapSpecific: {
+      ...input.mapSpecific,
+      ...mapSpecific,
+    },
+  };
+}
+
+function swissMeta(
+  tile: MutableLandData,
+  data: Partial<SwitzerlandMapData>
+): MutableLandData {
+  return mapSpecific(tile, data);
+}
+
+
+
+
+
+// TO DO test this, bot for 
+// { ...city("Perth", BLUE, white(1), 3), mapSpecific: { bonus: 3 } },
+// {...PLAIN, mapSpecific: {unpassable: true, name: 'apa'}},
 export const map = grid([
-  [
+  [,
     ...duplicate(8, UNPASSABLE),
     PLAIN,
     city("Geneva", [BLACK, BLUE, PURPLE, RED, YELLOW], [white(1)]),
   ],
-  [...duplicate(6, UNPASSABLE), plain({unpassableEdges: [Direction.TOP_RIGHT, Direction.BOTTOM]}), PLAIN],
+  [
+    ...duplicate(6, UNPASSABLE),
+    plain({ unpassableEdges: [Direction.TOP_RIGHT, Direction.BOTTOM] }),
+    PLAIN,
+  ],
   [
     ...duplicate(5, UNPASSABLE),
     PLAIN,
@@ -36,11 +64,7 @@ export const map = grid([
     UNPASSABLE,
     UNPASSABLE,
     UNPASSABLE,
-    city(
-      "La Chaux de Fonds",
-      [BLACK, BLUE, PURPLE, RED, YELLOW],
-      [white(3)],
-    ),
+    city("La Chaux de Fonds", [BLACK, BLUE, PURPLE, RED, YELLOW], [white(3)]),
     town("Neuchatel"),
     ...duplicate(4, PLAIN),
   ],
@@ -70,8 +94,9 @@ export const map = grid([
     city("Sion", PURPLE, [white(6)]),
     MOUNTAIN,
   ],
-  [UNPASSABLE,
-    city("Basel", RED, [white(4)]),
+  [
+    UNPASSABLE,
+    city("Basel", RED, [white(4)], 3),
     PLAIN,
     PLAIN,
     PLAIN,
@@ -100,9 +125,9 @@ export const map = grid([
     PLAIN,
     MOUNTAIN,
     PLAIN,
-    PLAIN,
-    PLAIN,
-    PLAIN,
+    swissMeta(MOUNTAIN, { enable5: true, name: "tunnel1" }),
+    swissMeta(MOUNTAIN, { enable5: true, name: "town1" }),
+    PLAIN
   ],
   [
     UNPASSABLE,
@@ -118,7 +143,7 @@ export const map = grid([
     UNPASSABLE,
     PLAIN,
     PLAIN,
-    city("Zurich", BLUE, [black(1)]),
+    city("Zurich", BLUE, [black(1)], 4),
     PLAIN,
     ...duplicate(3, MOUNTAIN),
     PLAIN,
@@ -128,11 +153,11 @@ export const map = grid([
     PLAIN,
     PLAIN,
     PLAIN,
-    town('Zug'),
+    town("Zug"),
     PLAIN,
     PLAIN,
+    swissMeta(MOUNTAIN, { enable5: true, name: "town2" }),
     PLAIN,
-    PLAIN
   ],
   [
     UNPASSABLE,
@@ -145,7 +170,7 @@ export const map = grid([
     PLAIN,
     PLAIN,
     PLAIN,
-    PLAIN
+    PLAIN,
   ],
   [
     UNPASSABLE,
@@ -170,7 +195,7 @@ export const map = grid([
     PLAIN,
     MOUNTAIN,
     MOUNTAIN,
-    town('Bellinzona'),
+    town("Bellinzona"),
   ],
   [
     ...duplicate(4, UNPASSABLE),

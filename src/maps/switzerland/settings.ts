@@ -7,6 +7,9 @@ import {
 import { map } from "./grid";
 import { SwitzerlandRoundEngine } from "./round";
 import { SwitzerlandSharesPhase } from "./shares";
+import { SwitzerlandCostCalculator } from "./cost";
+import { SwitzerlandPlayerHelper } from "./score";
+import {SwitzerlandBuildAction} from "./build"
 
 export class SwitzerlandMapSettings implements MapSettings {
   readonly key = GameKey.SWITZERLAND;
@@ -19,6 +22,12 @@ export class SwitzerlandMapSettings implements MapSettings {
   readonly stage = ReleaseStage.DEVELOPMENT;
 
   getOverrides() {
-    return [SwitzerlandRoundEngine, SwitzerlandSharesPhase];
+    return [
+      SwitzerlandRoundEngine,
+      SwitzerlandSharesPhase,
+      SwitzerlandCostCalculator,
+      SwitzerlandPlayerHelper,
+      SwitzerlandBuildAction
+    ];
   }
 }

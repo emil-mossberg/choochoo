@@ -129,7 +129,9 @@ export class PlayerHelper {
 
   countTrack(color: PlayerColor): number {
     let numTrack = 0;
+
     for (const space of this.grid().values()) {
+      // space.getMapSpecific()
       if (!(space instanceof Land)) continue;
       for (const track of space.getTrack()) {
         if (track.getOwner() !== color) continue;
