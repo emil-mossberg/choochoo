@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import {
   Button,
   Container,
+  Dropdown,
   DropdownProps,
   Form,
   FormCheckbox,
@@ -188,26 +189,28 @@ export function CreateGamePage() {
             onChange={setName}
             onBlur={validateGameInternal}
           />
-          <FormSelect
-            options={maps.map((m) => ({
-              key: m.key,
-              value: m.key,
-              text:
-                m.name +
-                (m.stage !== ReleaseStage.PRODUCTION &&
-                  ` (${releaseStageToString(m.stage)})`),
-            }))}
-            required
-            name="map"
-            label="Map"
-            value={gameKey}
-            disabled={isPending}
-            onChange={setGameKey}
-            error={validationError?.gameKey}
-            autoWidth
-            placeholder="Map"
-            onBlur={validateGameInternal}
-          />
+          <Form.Field required error={validationError?.gameKey}>
+            <label>Map</label>
+            <Dropdown
+              options={maps.map((m) => ({
+                key: m.key,
+                value: m.key,
+                text:
+                  m.name +
+                  (m.stage !== ReleaseStage.PRODUCTION &&
+                    ` (${releaseStageToString(m.stage)})`),
+              }))}
+              selection
+              search
+              name="map"
+              value={gameKey}
+              disabled={isPending}
+              onChange={setGameKey}
+              placeholder="Search and select a map..."
+              onBlur={validateGameInternal}
+              fluid
+            />
+          </Form.Field>
           <FormSelect
             options={allTurnDurations.map((duration) => ({
               key: duration,
