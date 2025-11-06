@@ -22,7 +22,7 @@ export const map = grid<SpaceData>([
     ...duplicate(3, PLAIN),
     city("Jackson", Good.BLUE, white(3), 1),
     ...duplicate(3, PLAIN),
-    city("New Orleans", Good.YELLOW, white(4), 3),
+    city("New Orleans", [Good.YELLOW, Good.WHITE], white(4), 3),
   ],
   [...duplicate(10, PLAIN), WATER],
   [
@@ -45,7 +45,7 @@ export const map = grid<SpaceData>([
     town("Selma"),
     RIVER,
     RIVER,
-    city("Mobile", Good.PURPLE, white(5), 3),
+    city("Mobile", [Good.PURPLE, Good.WHITE], white(5), 3),
   ],
   [
     city("Nashville", Good.BLUE, white(1), 1),
@@ -107,11 +107,11 @@ export const map = grid<SpaceData>([
     UNPASSABLE,
     ...duplicate(5, PLAIN),
     RIVER,
-    city("Savannah", Good.YELLOW, black(5), 3),
+    city("Savannah", [Good.YELLOW, Good.WHITE], black(5), 3),
   ],
   [
     city("Raleigh", Good.BLUE, black(2), 1),
     ...duplicate(4, PLAIN),
-    city("Charleston", Good.PURPLE, black(4), 3),
+    city("Charleston", [Good.PURPLE, Good.WHITE], black(4), 3),
   ],
 ]);
