@@ -1,3 +1,4 @@
+import { PuertoRicoMapSettings } from "./puerto_rico/settings";
 import { SouthernUsMapSettings } from "./southern_us/settings";
 import { BarbadosMapSettings } from "./barbados/settings";
 import { GameKey } from "../api/game_key";
@@ -47,6 +48,7 @@ export class MapRegistry {
   private readonly maps = new Map<GameKey, MapSettings>();
 
   private constructor() {
+    this.add(new PuertoRicoMapSettings());
     this.add(new SouthernUsMapSettings());
     this.add(new BarbadosMapSettings());
     this.add(new TrislandMapSettings());
